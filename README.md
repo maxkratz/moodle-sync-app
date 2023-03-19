@@ -1,4 +1,8 @@
 # MoodleSync
+
+[![Build MoodleSync sync-app](https://github.com/maxkratz/moodle-sync-app/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/maxkratz/moodle-sync-app/actions/workflows/build.yml)
+[![Test MoodleSync sync-app](https://github.com/maxkratz/moodle-sync-app/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/maxkratz/moodle-sync-app/actions/workflows/test.yml)
+
 Due to the digitalization in education and the resulting increasing amount of e-learning resources,
 many universities and other educational institutions use browser based learning platforms for sharing
 and managing those. An often used learning platform is Moodle. It offers lecturers the possibility

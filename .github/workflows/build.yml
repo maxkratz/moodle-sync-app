@@ -1,0 +1,99 @@
+name: Build MoodleSync sync-app
+on:
+  push:
+    # Run pipeline for commits on branch 'main' and on 'feature/<stuff>'
+    branches:
+      - main
+      - 'feature/**'
+      - 'hotfix/**'
+      - 'testing/**'
+    # Run pipeline for release tags
+    tags:
+     - 'v*.*.*'
+
+jobs:
+  # Build sync-app for Linux
+  build-linux:
+    runs-on: [ubuntu-22.04]
+    steps:
+      #
+      # Pre-requisites
+      #
+      - name: Install linux-specific dependencies
+        run: |
+          sudo apt update
+          sudo apt install -yq fakeroot
+      - name: Run common set up action
+        uses: maxkratz/moodle-sync-app@main
+      #
+      # Actual step
+      #
+      - name: Build sync-app
+        run: |
+          mvn --no-transfer-progress clean install -Dmaven.test.skip=true
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: moodle-sync-bundle-linux-x86_64
+          path: target/moodle-sync-bundle-*-linux-x86_64.zip
+
+  # Build sync-app for Windows
+  build-windows:
+    runs-on: [windows-2022]
+    steps:
+      #
+      # Pre-requisites
+      #
+      - name: Run common set up action
+        uses: maxkratz/moodle-sync-app@main
+      #
+      # Actual step
+      #
+      - name: Build sync-app
+        run: |
+          mvn --no-transfer-progress clean install
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: moodle-sync-bundle-windows-x86_64
+          path: target/moodle-sync-bundle-*-windows-x86_64.zip
+
+  # TODO: macOS-based builds are currently failing while packaging
+  # # Build sync-app for macOS
+  # build-macos:
+  #   runs-on: [macos-12]
+  #   steps:
+  #     #
+  #     # Pre-requisites
+  #     #
+  #     - name: Run common set up action
+  #       uses: maxkratz/moodle-sync-app@main
+  #     #
+  #     # Actual step
+  #     #
+  #     - name: Build sync-app
+  #       run: |
+  #         mvn --no-transfer-progress clean install
+  #     - name: Upload build artifact
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: moodle-sync-bundle-macosx-x86_64.zip
+  #         path: target/moodle-sync-bundle-macosx-x86_64
+
+  # Create a release if running on tag
+  create-release:
+    permissions:
+      contents: write
+    needs: [build-linux, build-windows]
+    runs-on: [ubuntu-22.04]
+    # Only run on pushed tags (and explicitely ignore scheduled runs)
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/') && github.event_name != 'schedule'
+    steps:
+      - name: Collect artifacts
+        uses: actions/download-artifact@master
+      - name: Release artifact
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            moodle-sync-bundle-linux-x86_64/*.zip
+            moodle-sync-bundle-windows-x86_64/*.zip

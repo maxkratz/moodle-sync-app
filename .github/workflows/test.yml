@@ -1,0 +1,62 @@
+name: Test MoodleSync sync-app
+on:
+  push:
+    # Run pipeline for commits on branch 'main' and on 'feature/<stuff>'
+    branches:
+      - main
+      - 'feature/**'
+      - 'hotfix/**'
+      - 'testing/**'
+
+jobs:
+  # Test sync-app on Linux
+  test-linux:
+    runs-on: [ubuntu-22.04]
+    steps:
+      #
+      # Pre-requisites
+      #
+      - name: Install linux-specific dependencies
+        run: |
+          sudo apt update
+          sudo apt install -yq fakeroot
+      - name: Run common set up action
+        uses: maxkratz/moodle-sync-app@main
+      #
+      # Actual step
+      #
+      - name: Test sync-app
+        run: |
+          mvn --no-transfer-progress clean test
+
+  # Test sync-app on Windows
+  test-windows:
+    runs-on: [windows-2022]
+    steps:
+      #
+      # Pre-requisites
+      #
+      - name: Run common set up action
+        uses: maxkratz/moodle-sync-app@main
+      #
+      # Actual step
+      #
+      - name: Test sync-app
+        run: |
+          mvn --no-transfer-progress clean test
+
+  # Test sync-app on macOS
+  test-macos:
+    runs-on: [macos-12]
+    steps:
+      #
+      # Pre-requisites
+      #
+      - name: Run common set up action
+        uses: maxkratz/moodle-sync-app@main
+      #
+      # Actual step
+      #
+      - name: Test sync-app
+        run: |
+          mvn --no-transfer-progress clean test

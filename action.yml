@@ -1,0 +1,30 @@
+name: 'Common Setup'
+description: 'Common setup for the CI'
+runs:
+  using: "composite"
+  steps:
+    # Install dependencies
+    - name: Install Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+    - name: Set up Maven
+      uses: stCarolas/setup-maven@v4.5
+      with:
+        maven-version: 3.9.0
+    # Build dependencies
+    - name: Check out lectureStudio
+      uses: actions/checkout@master
+      with:
+        repository: lectureStudio/lectureStudio
+    - name: Build lectureStudio dependencies
+      shell: bash
+      run: |
+        mvn --no-transfer-progress clean install -pl lect-core -am
+        mvn --no-transfer-progress clean install -pl lect-javafx -am
+    # Check out the repository code
+    - name: Check out repository code
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
