@@ -1,5 +1,7 @@
 # MoodleSync
 
+! Attention: Until now MoodleSync is not working with Moodle 4.2. !
+
 [![Build MoodleSync sync-app](https://github.com/maxkratz/moodle-sync-app/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/maxkratz/moodle-sync-app/actions/workflows/build.yml)
 [![Test MoodleSync sync-app](https://github.com/maxkratz/moodle-sync-app/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/maxkratz/moodle-sync-app/actions/workflows/test.yml)
 
@@ -9,10 +11,15 @@ and managing those. An often used learning platform is Moodle. It offers lecture
 to publish lecture notes, recordings and other e-learning materials amongst their students. Because
 of the fact that the process to upload and manage data via the browser view of Moodle is very time
 consuming, the objective of this project was to develop a desktop application used for file
-synchronization between a local directory and the learning platform Moodle. Futhermore a Moodle plugin was developed.
+synchronization between a local directory and the learning platform Moodle. Futhermore students can download files or a whole course with simply one click.
+A Moodle plugin to add new web-service functions was developed.
 For further information about installation and usage please visit the wiki of this repository.
 
 Works with following plugin for Moodle: https://github.com/MoodleSync/sync-plugin.
 
-## Screenshot
-![Main view](https://github.com/MoodleSync/sync-app/blob/main/doc/images/mainpage.png)
+## Screenshots
+
+Student mode | Trainer mode
+:-------------------------:|:-------------------------:
+![Main view](https://github.com/MoodleSync/sync-app/blob/main/doc/images/StudentMode.png)  |  ![Main view](https://github.com/MoodleSync/sync-app/blob/main/doc/images/TrainerMode.png)
+
