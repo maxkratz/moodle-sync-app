@@ -1,6 +1,5 @@
 # MoodleSync
 
-! Attention: Until now MoodleSync is not working with Moodle 4.2. !
 
 [![Build MoodleSync sync-app](https://github.com/maxkratz/moodle-sync-app/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/maxkratz/moodle-sync-app/actions/workflows/build.yml)
 [![Test MoodleSync sync-app](https://github.com/maxkratz/moodle-sync-app/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/maxkratz/moodle-sync-app/actions/workflows/test.yml)

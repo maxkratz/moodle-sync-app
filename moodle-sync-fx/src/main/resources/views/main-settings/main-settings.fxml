@@ -4,7 +4,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import org.lecturestudio.javafx.factory.*?>
+<?import moodle.sync.javafx.factory.LocaleListCell?>
+<?import moodle.sync.javafx.factory.LocaleCellFactory?>
 
 <!--
     In this document, the layout of the "settings-page" is defined
@@ -17,9 +18,6 @@
             <padding>
                 <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
             </padding>
-         <font>
-            <Font size="15.0" />
-         </font>
         </Label>
         <GridPane alignment="CENTER">
             <columnConstraints>

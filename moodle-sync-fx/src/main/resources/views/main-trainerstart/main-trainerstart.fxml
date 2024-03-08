@@ -5,14 +5,16 @@
 <?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.*?>
 <?import moodle.sync.javafx.custom.*?>
-<?import org.lecturestudio.javafx.control.*?>
-<?import org.lecturestudio.javafx.layout.*?>
+<?import moodle.sync.javafx.core.control.*?>
+<?import moodle.sync.javafx.layout.*?>
 
 <!--
     In this document, the layout of the "start-page" is defined
     @author Daniel Schröter
 -->
 
+<?import moodle.sync.javafx.layout.ColumnSizeConstraints?>
+<?import moodle.sync.javafx.layout.DynamicResizePolicy?>
 <fx:root alignment="CENTER" type="VBox" xmlns="http://javafx.com/javafx/17.0.2-ea"
          xmlns:fx="http://javafx.com/fxml/1" minWidth="580.0">
     <BorderPane VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
@@ -56,9 +58,9 @@
                         <SvgIcon styleClass="icon, download-icon" />
                     </graphic>
                 </Button>
-                <Button fx:id="updateButton" mnemonicParsing="false" text="%start.update"/>
-                <Button fx:id="syncButton" mnemonicParsing="false" text="%start.sync" />
-                <Button fx:id="settingsButton" mnemonicParsing="false" text="%start.settings" />
+                <Button fx:id="updateButton" mnemonicParsing="false" text="%start.update" minWidth="90"/>
+                <Button fx:id="syncButton" mnemonicParsing="false" text="%start.sync" minWidth="110" />
+                <Button fx:id="settingsButton" mnemonicParsing="false" text="%start.settings" minWidth="95" />
                 <Button fx:id="helpButton" mnemonicParsing="false" text="%start.help" >
                     <tooltip><Tooltip text="%start.help.tooltip" /></tooltip>
                     <graphic>

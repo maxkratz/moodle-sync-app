@@ -44,9 +44,9 @@ public class FileService {
         int remove = -1;
         for (int i = 0; i < sectionList.size(); i++) {
             String[] sectionFolder = sectionList.get(i).getFileName().toString().split("_", 2);
-            if (sectionFolder[sectionFolder.length - 1].equals(section.getName())) {
+            if (sectionFolder[sectionFolder.length - 1].equals(section.getName().trim())) {
                 File temp = new File(sectionList.get(i).toString());
-                temp.renameTo(new File((sectionList.get(i).getParent().toString() + "/" + section.getSection() + "_" + section.getName())));
+                temp.renameTo(new File((sectionList.get(i).getParent().toString() + "/" + section.getSection() + "_" + section.getName().trim())));
                 remove = i;
                 break;
             }
@@ -153,7 +153,7 @@ public class FileService {
                     true);
             if(!isNull(module.getContents().get(0).getFileurl())){
                 element.setDownloadable(true);
-                element.setFileUrl(module.getContents().get(0).getFileurl());
+                element.addContentOnline(module.getContents().get(0));
             }
         }
 
@@ -185,7 +185,7 @@ public class FileService {
                             true);
                     if(!isNull(module.getContents().get(0).getFileurl())){
                         element.setDownloadable(true);
-                        element.setFileUrl(module.getContents().get(0).getFileurl());
+                        element.addContentOnline(module.getContents().get(0));
                     }
                     break;
                 } else {
@@ -206,7 +206,7 @@ public class FileService {
                     true);
             if(!isNull(module.getContents().get(0).getFileurl())){
                 element.setDownloadable(true);
-                element.setFileUrl(module.getContents().get(0).getFileurl());
+                element.addContentOnline(module.getContents().get(0));
             }
         }
 
@@ -260,9 +260,13 @@ public class FileService {
             }
         }
         else {
-            return new SyncTableElement(module.getName(), module.getId(), sectionNum, sectionId, position,
+            SyncTableElement existingFolder =  new SyncTableElement(module.getName(), module.getId(), sectionNum, sectionId, position,
                     module.getModname(), path, false, false, MoodleAction.ExistingFile,
                     module.getVisible() == 1, true);
+            for(Content content : module.getContents()) {
+                existingFolder.addContentOnline(content);
+            }
+            return existingFolder;
         }
     }
 
