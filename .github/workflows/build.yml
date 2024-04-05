@@ -32,7 +32,7 @@ jobs:
         run: |
           mvn --no-transfer-progress clean install -Dmaven.test.skip=true
       - name: Upload build artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: moodle-sync-bundle-linux-x86_64
           path: target/moodle-sync-bundle-*-linux-x86_64.zip
@@ -53,7 +53,7 @@ jobs:
         run: |
           mvn --no-transfer-progress clean install
       - name: Upload build artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: moodle-sync-bundle-windows-x86_64
           path: target/moodle-sync-bundle-*-windows-x86_64.zip
@@ -92,7 +92,7 @@ jobs:
       - name: Collect artifacts
         uses: actions/download-artifact@master
       - name: Release artifact
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: |
             moodle-sync-bundle-linux-x86_64/*.zip
